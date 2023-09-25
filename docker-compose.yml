@@ -2,16 +2,16 @@ version: '3.6'
 services:
   mediawiki:
     container_name: wiki
-    image: mediawiki:1.35.11 # latestでも可
+    image: mediawiki:1.40.0
     restart: always
     ports:
       - 80:80
     volumes:
       - ./mediawiki/images:/var/www/html/images
       #- ./mediawiki/LocalSettings.php:/var/www/html/LocalSettings.php
-  mysql:
+  db:
     container_name: db
-    image: mysql:5.7.28
+    image: mysql:8.0
     environment:
       #イメージの起動時に作成するデータベースの名前
       MYSQL_DATABASE: my_wiki

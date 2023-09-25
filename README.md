@@ -1,8 +1,8 @@
 # Mediawiki用Docker
 
 ## 構成
-- mediawiki 1.35.11
-- mysql 5.7.28
+- mediawiki 1.40.0
+- mysql 8.0
 - phpmyadmin latest
 
 
@@ -17,6 +17,10 @@ docker-compose down
 ```
 
 ## URL
+- phpMyAdmin
+```
+http://localhost:20080
+```
 - Mediawiki
 ```
 http://localhost
