@@ -1,0 +1,33 @@
+version: '3.6'
+services:
+  mediawiki:
+    container_name: wiki
+    image: mediawiki:1.35.11 # latestでも可
+    restart: always
+    ports:
+      - 80:80
+    volumes:
+      - ./mediawiki/images:/var/www/html/images
+      #- ./mediawiki/LocalSettings.php:/var/www/html/LocalSettings.php
+  mysql:
+    container_name: db
+    image: mysql:5.7.28
+    environment:
+      #イメージの起動時に作成するデータベースの名前
+      MYSQL_DATABASE: my_wiki
+      #このユーザはMYSQL_DATABASE変数で指定されたデータベースに対してスーパーユーザとしての権限(GRANT ALL)を保持する
+      MYSQL_USER: mysqluser
+      #MYSQL_USERのパスワード
+      MYSQL_PASSWORD: mysqluser00
+      # MySQLにおけるスーパーユーザであるrootアカウントに設定するためのパスワード
+      MYSQL_ROOT_PASSWORD: mysqluser000
+    volumes:
+      - ./db/mysql/var_lib_mysql:/var/lib/mysql
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: phpmyadmin_ingrid
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - 20080:80
